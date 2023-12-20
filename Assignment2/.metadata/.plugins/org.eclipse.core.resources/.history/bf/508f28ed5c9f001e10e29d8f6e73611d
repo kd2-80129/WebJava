@@ -1,0 +1,13 @@
+package com.sunbeam.daos;
+
+import java.util.List;
+
+import com.sunbeam.pojos.Users;
+
+public interface UserInt extends AutoCloseable{
+	public int signUp(Users u) throws Exception;
+	public int editInfo(Users u) throws Exception;
+	public int updatePassword(int userId, String newPassword) throws Exception;
+	public Users signin(String email) throws Exception;
+	public List<Users> findAll() throws Exception;
+}

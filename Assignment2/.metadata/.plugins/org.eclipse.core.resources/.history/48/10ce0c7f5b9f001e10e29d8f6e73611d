@@ -1,0 +1,8 @@
+package com.sunbeam.daos;
+
+import com.sunbeam.pojos.Users;
+
+public interface UserInt extends AutoCloseable{
+	public int save(Users u) throws Exception;
+	public int update(Users u) throws Exception;
+}

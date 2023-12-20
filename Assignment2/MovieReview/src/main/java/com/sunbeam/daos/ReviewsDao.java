@@ -10,13 +10,14 @@ import java.util.List;
 import com.sunbeam.pojos.Reviews;
 import com.sunbeam.utils.DBUtil;
 
-public class ReviewsDao implements AutoCloseable{
+public class ReviewsDao implements ReviewsInt, AutoCloseable{
 	private Connection con;
 	
 	public ReviewsDao() throws SQLException{
 		con = DBUtil.getConnection();
 	}
 	
+	@Override
 	public int insReview(Reviews rev) throws SQLException{
 		String sql = "INSERT INTO reviews VALUES(default, ?, ?, ?, ?, ?)";
 		try(PreparedStatement stmt = con.prepareStatement(sql)){
@@ -31,7 +32,7 @@ public class ReviewsDao implements AutoCloseable{
 			return cnt;
 		}
 	}
-	
+	@Override
 	public List<Reviews> displayAll() throws SQLException{
 		List<Reviews> list = new ArrayList<>();
 		String sql = "SELECT * FROM reviews";
@@ -53,6 +54,7 @@ public class ReviewsDao implements AutoCloseable{
 		return list;
 	}
 	
+	@Override
 	public Reviews findById(int id) throws SQLException{
 		Reviews rev = null;
 		String sql = "SELECT * FROM reviews where id = ?";
@@ -75,6 +77,7 @@ public class ReviewsDao implements AutoCloseable{
 		return rev;
 	}
 	
+	@Override
 	public List<Reviews> displayMyReviews(int user_id) throws SQLException{
 		List<Reviews> list = new ArrayList<>();
 		String sql = "SELECT * FROM reviews WHERE user_id = ?";
@@ -96,7 +99,7 @@ public class ReviewsDao implements AutoCloseable{
 		}
 		return list;
 	}
-	
+	@Override
 	public int editReview(String review, int user_id, int id, int rating) throws SQLException{
 		int cnt = 0;
 		String sql = "UPDATE reviews SET review = ?, rating = ? where user_id = ? and id = ?";
@@ -111,6 +114,7 @@ public class ReviewsDao implements AutoCloseable{
 		return cnt;
 	}
 	
+	@Override
 	public int deleteReview(int rev_id, int user_id) throws SQLException{
 		String sql = "DELETE FROM reviews where id = ? and user_id = ?";
 		try(PreparedStatement stmt = con.prepareStatement(sql)){
@@ -129,5 +133,11 @@ public class ReviewsDao implements AutoCloseable{
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<Reviews> getSharedWithUser(int userId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

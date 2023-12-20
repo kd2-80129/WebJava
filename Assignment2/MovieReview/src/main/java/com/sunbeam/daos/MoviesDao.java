@@ -10,7 +10,7 @@ import java.util.List;
 import com.sunbeam.pojos.Movies;
 import com.sunbeam.utils.DBUtil;
 
-public class MoviesDao implements AutoCloseable{
+public class MoviesDao implements MoviesInt, AutoCloseable {
 	private Connection con;
 
 	public MoviesDao() throws SQLException{

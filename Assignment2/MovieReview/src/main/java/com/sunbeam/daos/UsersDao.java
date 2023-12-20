@@ -11,13 +11,13 @@ import com.sunbeam.pojos.Users;
 import com.sunbeam.utils.DBUtil;
 import com.sunbeam.utils.DateUtil;
 
-public class UsersDao implements AutoCloseable{
+public class UsersDao implements UserInt,AutoCloseable{
 	private Connection con;
 	
 	public UsersDao() throws SQLException{
 		con = DBUtil.getConnection();
 	}
-	
+	@Override
 	public int signUp(Users user) throws SQLException{
 		String sql= "INSERT INTO users VALUES(default, ?, ?, ?, ?, ?, ?)";
 		try(PreparedStatement stmt = con.prepareStatement(sql)){
@@ -33,7 +33,7 @@ public class UsersDao implements AutoCloseable{
 			return cnt;
 		}
 	}
-	
+	@Override
 	public Users signin(String email) throws SQLException{
 		Users us = new Users();
 		String sql = "SELECT * FROM users where email = ?";
@@ -56,8 +56,9 @@ public class UsersDao implements AutoCloseable{
 		return us;
 	}
 	
-	
-	public void editInfo(Users user) throws SQLException{
+	@Override
+	public int editInfo(Users user) throws SQLException{
+		int cnt = 0;
 		String sql = "UPDATE users SET first_name = ?, last_name = ?, mobile = ?, birth = ? WHERE id = ?";
 		try(PreparedStatement stmt = con.prepareStatement(sql)){
 			stmt.setString(1, user.getFirstName());
@@ -67,21 +68,25 @@ public class UsersDao implements AutoCloseable{
 			stmt.setDate(4, sdate);
 			stmt.setInt(5, user.getId());
 			
-			stmt.executeUpdate();
+			cnt = stmt.executeUpdate();
 		}
+		return cnt;
 	}
 	
-	public void changePasswd(Users user) throws SQLException{
+	@Override
+	public int changePasswd(Users user) throws SQLException{
+		int cnt = 0;
 		String sql = "UPDATE users SET email = ?, password = ? WHERE id = ?";
 		try(PreparedStatement stmt = con.prepareStatement(sql)){
 			stmt.setString(1,user.getEmail());
 			stmt.setString(2,user.getPasswd());
 			stmt.setInt(3, user.getId());
 			
-			stmt.executeUpdate();
+			cnt = stmt.executeUpdate();
 		}
+		return cnt;
 	}
-	
+	@Override
 	public List<Users> displayAll() throws SQLException{
 		List<Users> list = new ArrayList<>();
 		String sql = "SELECT * FROM users";

@@ -1,0 +1,6 @@
+package com.sunbeam.daos;
+
+public interface UserInt extends AutoCloseable{
+	public int save(User u) throws Exception;
+	public int update(User u) throws Exception;
+}
