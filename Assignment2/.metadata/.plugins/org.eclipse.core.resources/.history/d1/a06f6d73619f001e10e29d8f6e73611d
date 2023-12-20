@@ -116,19 +116,16 @@ public class MovieList extends HttpServlet{
 			}
 		} else if(type.equals("shared")) {
 			try(ReviewsDao rdao = new ReviewsDao()){
-				List<Reviews> list =  rdao.getSharedWithUser(currUser.getId());
+				List<Shares> list =  rdao.display(currUser.getId());
 				
-				for(Reviews r : list) {
+				for(Shares s : list) {
 					out.println("<tr>");
-					out.println("<td>" + r.getId() +"</td>");
-					try(MoviesDao mdao = new MoviesDao()) {
-						Movies m = mdao.findById(r.getMovie_id());
-						out.println("<td>" + m.getTitle() +"</td>");
+					try(ReviewsDao rdao = new ReviewsDao()) {
+						Reviews r = rdao.findById(s.getReview_id());
+						out.println("<td>" + r.getReview() +"</td>");
 					} catch (Exception e) {
 						throw new ServletException(e);
-					}
-					out.println("<td>" + r.getRating() +"</td>");
-					out.println("<td>" + r.getReview() +"</td>");				
+					}					
 					out.println("</tr>");
 				}
 	  		} catch(Exception e) {

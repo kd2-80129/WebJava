@@ -147,8 +147,10 @@ public class ReviewsDao implements ReviewsInt, AutoCloseable{
 					int movie_id = rs.getInt("movie_id");
 					String review = rs.getString("review");
 					int rating = rs.getInt("rating");
-					java.util.Date jdate = new java.util.Date();
-					Reviews rev = new Reviews(id,movie_id, review,rating,0,jdate);
+					int users_id = rs.getInt("user_id");
+					java.sql.Timestamp sdate = rs.getTimestamp("modified");
+					java.util.Date jdate = new java.util.Date(sdate.getTime());
+					Reviews rev = new Reviews(id,movie_id, review,rating,users_id,jdate);
 					list.add(rev);
 				}
 			}

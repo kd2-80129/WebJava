@@ -138,7 +138,7 @@ public class ReviewsDao implements ReviewsInt, AutoCloseable{
 	@Override
 	public List<Reviews> getSharedWithUser(int userId) throws Exception {
 		List<Reviews> list = new ArrayList<>();
-		String sql = "select reviews.id, reviews.movie_id, reviews.review, reviews.rating from reviews, shares where reviews.id = shares.review_id and shares.user_id = ?";
+		String sql = "select reviews.id, reviews.movie_id, reviews.review, reviews.rating from reviews, shares where reviews.id = shares.review_id and shares.user_id = 5; ";
 		try(PreparedStatement stmt = con.prepareStatement(sql)){
 			stmt.setInt(1, userId);
 			try(ResultSet rs = stmt.executeQuery()){
@@ -147,8 +147,10 @@ public class ReviewsDao implements ReviewsInt, AutoCloseable{
 					int movie_id = rs.getInt("movie_id");
 					String review = rs.getString("review");
 					int rating = rs.getInt("rating");
-					java.util.Date jdate = new java.util.Date();
-					Reviews rev = new Reviews(id,movie_id, review,rating,0,jdate);
+					int users_id = rs.getInt("user_id");
+					java.sql.Timestamp sdate = rs.getTimestamp("modified");
+					java.util.Date jdate = new java.util.Date(sdate.getTime());
+					Reviews rev = new Reviews(id,movie_id, review,rating,users_id,jdate);
 					list.add(rev);
 				}
 			}
