@@ -53,9 +53,31 @@ public class ReviewsDao implements AutoCloseable{
 		return list;
 	}
 	
+	public Reviews findById(int id) throws SQLException{
+		Reviews rev = null;
+		String sql = "SELECT * FROM reviews where id = ?";
+		try(PreparedStatement stmt = con.prepareStatement(sql)){
+			stmt.setInt(1, id);
+			try(ResultSet rs = stmt.executeQuery()){
+				while(rs.next()) {
+					id = rs.getInt("id");
+					int movie_id = rs.getInt("movie_id");
+					String review = rs.getString("review");
+					int rating = rs.getInt("rating");
+					int users_id = rs.getInt("user_id");
+					java.sql.Timestamp sdate = rs.getTimestamp("modified");
+					java.util.Date jdate = new java.util.Date(sdate.getTime());
+					rev = new Reviews(id,movie_id, review,rating,users_id,jdate);
+					
+				}
+			}
+		}
+		return rev;
+	}
+	
 	public List<Reviews> displayMyReviews(int user_id) throws SQLException{
 		List<Reviews> list = new ArrayList<>();
-		String sql = "SELECT * FROM reviews WHERE users_id = ?";
+		String sql = "SELECT * FROM reviews WHERE user_id = ?";
 		try(PreparedStatement stmt = con.prepareStatement(sql)){
 			stmt.setInt(1, user_id);
 			try(ResultSet rs = stmt.executeQuery()){
@@ -64,7 +86,7 @@ public class ReviewsDao implements AutoCloseable{
 					int movie_id = rs.getInt("movie_id");
 					String review = rs.getString("review");
 					int rating = rs.getInt("rating");
-					int users_id = rs.getInt("users_id");
+					int users_id = rs.getInt("user_id");
 					java.sql.Timestamp sdate = rs.getTimestamp("modified");
 					java.util.Date jdate = new java.util.Date(sdate.getTime());
 					Reviews rev = new Reviews(id,movie_id, review,rating,users_id,jdate);
@@ -75,19 +97,22 @@ public class ReviewsDao implements AutoCloseable{
 		return list;
 	}
 	
-	public void editReview(String review, int user_id, int id) throws SQLException{
-		String sql = "UPDATE reviews SET review = ? where users_id = ? and id = ?";
+	public int editReview(String review, int user_id, int id, int rating) throws SQLException{
+		int cnt = 0;
+		String sql = "UPDATE reviews SET review = ?, rating = ? where user_id = ? and id = ?";
 		try(PreparedStatement stmt = con.prepareStatement(sql)){
 			stmt.setString(1, review);
-			stmt.setInt(2, user_id);
-			stmt.setInt(3, id);
+			stmt.setInt(2, rating);
+			stmt.setInt(3, user_id);
+			stmt.setInt(4, id);
 			
-			stmt.executeUpdate();
+			cnt = stmt.executeUpdate();
 		}
+		return cnt;
 	}
 	
 	public int deleteReview(int rev_id, int user_id) throws SQLException{
-		String sql = "DELETE FROM reviews where id = ? and users_id = ?";
+		String sql = "DELETE FROM reviews where id = ? and user_id = ?";
 		try(PreparedStatement stmt = con.prepareStatement(sql)){
 			stmt.setInt(1, rev_id);
 			stmt.setInt(2, user_id);

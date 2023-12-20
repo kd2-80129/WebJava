@@ -3,7 +3,7 @@ package com.sunbeam.utils;
 import java.text.SimpleDateFormat;
 
 public class DateUtil {
-	private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	public static String toString(java.util.Date date) {
 		return sdf.format(date);
 	}

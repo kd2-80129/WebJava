@@ -1,0 +1,40 @@
+package com.sunbeam.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.sunbeam.daos.UsersDao;
+import com.sunbeam.pojos.Users;
+
+public class ShareServlet extends HttpServlet{
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setContentType("text/html");
+		PrintWriter out = resp.getWriter();
+		
+		out.println("<html>");
+		out.println("<head>");
+		out.println("<title>Share</title>");
+		out.println("</head>");
+		out.println("<body>");
+		out.println("<select name='sharedto'>");
+		try(UsersDao udao = new UsersDao()){
+			List<Users> list = udao.displayAll();
+			
+			for(Users u : list) {
+				out.println("<option value="+ u.getId() +">" + u.getId() +" " + u.getFirstName() +"</option>");
+			}
+		} catch(Exception e) {
+			throw new ServletException(e);
+		}
+		out.println("</select><br/><br/>");
+		out.println("</body>");
+		out.println("</html>");
+	}
+}

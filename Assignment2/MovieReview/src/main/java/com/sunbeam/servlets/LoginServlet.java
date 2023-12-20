@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet{
 			if(user != null && user.getPasswd().equals(password)) {
 				HttpSession session = req.getSession();
 				session.setAttribute("CurrUser", user);
-				resp.sendRedirect("reviewlist");
+				resp.sendRedirect("reviewlist?type=all");
 				
 			} else {
 				resp.setContentType("text/html");

@@ -1,0 +1,53 @@
+package com.sunbeam.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.sunbeam.daos.MoviesDao;
+import com.sunbeam.daos.ReviewsDao;
+import com.sunbeam.pojos.Movies;
+import com.sunbeam.pojos.Reviews;
+
+@WebServlet("/edit")
+public class EditServlet extends HttpServlet{
+
+		@Override
+		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			resp.setContentType("text/html");
+			PrintWriter out = resp.getWriter();
+			
+			int id = Integer.parseInt(req.getParameter("reviewid"));
+			
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Edit Review</title>");
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<form method='post' action='edit'>");
+			Reviews r = null;
+			try(ReviewsDao rdao = new ReviewsDao()){
+				r = rdao.findById(id);
+			} catch(Exception e) {
+				throw new ServletException(e);
+			}
+			out.println("Id : <input type='number' value='"+ r.getId() +"' name='id' readonly />");
+			try(MoviesDao mdao = new MoviesDao()) {
+				Movies m = mdao.findById(r.getMovie_id());
+				out.println("Id : <input type='text' value='"+ m.getTitle() +"' name='movie' readonly />");
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
+			out.println("Id : <input type='number' value='"+ r.getRating() +"' name='rating' />");
+			out.println("Review : <input type='text' value='"+ r.getReview() +"' name='review' />");
+			out.println("</form>");
+			out.println("<form>");
+			out.println("</body>");
+			out.println("</html>");
+		}
+}

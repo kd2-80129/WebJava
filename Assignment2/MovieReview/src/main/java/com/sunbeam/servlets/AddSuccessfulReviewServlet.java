@@ -34,7 +34,7 @@ public class AddSuccessfulReviewServlet extends HttpServlet{
 			
 			if(cnt == 1) {
 				System.out.println("Successfull");
-				resp.sendRedirect("reviewlist");
+				resp.sendRedirect("reviewlist?type=all");
 			}
 		} catch(Exception e) {
 			throw new ServletException(e);
