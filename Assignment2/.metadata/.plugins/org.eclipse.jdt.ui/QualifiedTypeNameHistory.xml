@@ -3,13 +3,11 @@
     <fullyQualifiedTypeName name="com.sunbeam.utils.DBUtil"/>
     <fullyQualifiedTypeName name="com.sunbeam.daos.MoviesDao"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
-    <fullyQualifiedTypeName name="com.sunbeam.pojos.Movies"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="org.apache.catalina.User"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="com.sunbeam.utils.DateUtil"/>
-    <fullyQualifiedTypeName name="com.sunbeam.pojos.Reviews"/>
     <fullyQualifiedTypeName name="javax.security.auth.message.callback.PrivateKeyCallback.Request"/>
     <fullyQualifiedTypeName name="org.apache.catalina.connector.Response"/>
     <fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
@@ -19,11 +17,15 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="com.sunbeam.daos.UsersDao"/>
-    <fullyQualifiedTypeName name="com.sunbeam.pojos.Users"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="com.sunbeam.daos.ShareDao"/>
     <fullyQualifiedTypeName name="com.sunbeam.pojos.Shares"/>
+    <fullyQualifiedTypeName name="java.lang.AutoCloseable"/>
+    <fullyQualifiedTypeName name="com.sunbeam.pojos.Movies"/>
+    <fullyQualifiedTypeName name="com.sunbeam.pojos.Reviews"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.sunbeam.pojos.Users"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
 </qualifiedTypeNameHistroy>
