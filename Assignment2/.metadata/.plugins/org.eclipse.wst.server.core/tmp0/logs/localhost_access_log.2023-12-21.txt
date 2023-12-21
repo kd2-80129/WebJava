@@ -1,0 +1,10 @@
+127.0.0.1 - - [21/Dec/2023:17:18:40 +0530] "GET / HTTP/1.1" 404 751
+127.0.0.1 - - [21/Dec/2023:17:18:41 +0530] "GET /MovieReview/ HTTP/1.1" 200 407
+127.0.0.1 - - [21/Dec/2023:17:18:42 +0530] "GET /favicon.ico HTTP/1.1" 404 762
+127.0.0.1 - - [21/Dec/2023:17:18:50 +0530] "POST /MovieReview/login HTTP/1.1" 302 -
+127.0.0.1 - - [21/Dec/2023:17:18:50 +0530] "GET /MovieReview/reviewlist HTTP/1.1" 200 1940
+127.0.0.1 - - [21/Dec/2023:17:18:50 +0530] "GET /MovieReview/delete.png HTTP/1.1" 200 3748
+127.0.0.1 - - [21/Dec/2023:17:18:50 +0530] "GET /MovieReview/edit.png HTTP/1.1" 200 10157
+127.0.0.1 - - [21/Dec/2023:17:18:50 +0530] "GET /MovieReview/share.png HTTP/1.1" 200 3242
+127.0.0.1 - - [21/Dec/2023:17:19:50 +0530] "GET /MovieReview/reviewlist?type=my HTTP/1.1" 200 1754
+127.0.0.1 - - [21/Dec/2023:17:19:52 +0530] "GET /MovieReview/reviewlist?type=shared HTTP/1.1" 200 735

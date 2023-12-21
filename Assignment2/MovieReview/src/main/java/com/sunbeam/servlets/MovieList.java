@@ -60,7 +60,7 @@ public class MovieList extends HttpServlet{
 		out.println("<th>Action</th>");
 		out.println("</thead>");
 		out.println("<tbody>");
-		if(type.equals("all")) {
+		if(type == null || type.equals("all")) {
 			try(ReviewsDao rdao = new ReviewsDao()){
 				List<Reviews> list =  rdao.displayAll();
 				
